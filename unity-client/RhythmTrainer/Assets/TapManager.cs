@@ -8,6 +8,8 @@ public class TapManager : MonoBehaviour
     private double startTime;
     private double interval;
     public TextMeshProUGUI judgementText;
+    public float judgementDisplayTime = 0.5f;
+    private float judgementTimer = 0f;
 
     void Start()
     {
@@ -17,6 +19,16 @@ public class TapManager : MonoBehaviour
 
     void Update()
     {
+        if (judgementTimer > 0)
+        {
+            judgementTimer -= Time.deltaTime;
+
+            if (judgementTimer <= 0)
+            {
+                judgementText.text = "";
+            }
+        }
+
         double currentTime = AudioSettings.dspTime;
         double beatTime = GetNearestBeatTime(currentTime);
 
@@ -30,13 +42,35 @@ public class TapManager : MonoBehaviour
             double absDelta = Mathf.Abs((float)delta);
 
             if (absDelta < 0.02)
+            {
                 result = "Perfect";
+                judgementText.color = Color.green;
+            }
             else if (absDelta < 0.06)
-                result = delta < 0 ? "Early" : "Late";
+            {
+                if (delta < 0)
+                {
+                    result = "Early";
+                    judgementText.color = Color.yellow;
+                }
+                else
+                {
+                    result = "Late";
+                    judgementText.color = new Color(1f, 0.5f, 0f); // 橘色
+                }
+            }
             else
+            {
                 result = "Miss";
+                judgementText.color = Color.red;
+            }
 
-            judgementText.text = result;
+            string deltaText = delta >= 0 
+                ? "(+" + delta.ToString("F3") + "s)" 
+                : "(" + delta.ToString("F3") + "s)";
+
+            judgementText.text = result + " " + deltaText;
+            judgementTimer = judgementDisplayTime;
 
             Debug.Log(result + " | Δt: " + delta);
         }

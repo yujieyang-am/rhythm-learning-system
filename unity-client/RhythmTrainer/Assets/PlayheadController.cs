@@ -5,9 +5,13 @@ public class PlayheadController : MonoBehaviour
     public RectTransform playhead;
     public float bpm = 60f;
 
+    public float beat1X = -300f;
+    public float beat2X = -100f;
+    public float beat3X = 100f;
+    public float beat4X = 300f;
+
     private double startTime;
     private double interval;
-    private float[] beatPositions = { -300f, -100f, 100f, 300f };
 
     void Start()
     {
@@ -22,21 +26,24 @@ public class PlayheadController : MonoBehaviour
 
         if (elapsed < 0) return;
 
-        double beatProgress = elapsed / interval;
-        int wholeBeat = Mathf.FloorToInt((float)beatProgress);
-        int currentBeat = wholeBeat % 4;
+        int beatIndex = Mathf.FloorToInt((float)(elapsed / interval)) % 4;
 
-        float t = (float)(beatProgress - Mathf.Floor((float)beatProgress));
+        float x = beat1X;
 
-        float x;
-
-        if (currentBeat < 3)
+        switch (beatIndex)
         {
-            x = Mathf.Lerp(beatPositions[currentBeat], beatPositions[currentBeat + 1], t);
-        }
-        else
-        {
-            x = beatPositions[3];
+            case 0:
+                x = beat1X;
+                break;
+            case 1:
+                x = beat2X;
+                break;
+            case 2:
+                x = beat3X;
+                break;
+            case 3:
+                x = beat4X;
+                break;
         }
 
         Vector2 pos = playhead.anchoredPosition;
