@@ -2,26 +2,22 @@ using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
+    public RhythmConductor conductor;
     public AudioSource audioSource;
-    public float bpm = 60f;
 
-    private double nextTickTime;
-    private double interval;
-
-    void Start()
-    {
-        interval = 60.0 / bpm;
-        nextTickTime = AudioSettings.dspTime + 1.0; // 延遲1秒開始
-    }
+    private int nextBeatIndex = 0;
 
     void Update()
     {
+        if (conductor == null || !conductor.IsReady()) return;
+
         double currentTime = AudioSettings.dspTime;
+        double nextTickTime = conductor.GetBeatTime(nextBeatIndex);
 
         if (currentTime >= nextTickTime)
         {
             audioSource.Play();
-            nextTickTime += interval;
+            nextBeatIndex++;
         }
     }
 }
