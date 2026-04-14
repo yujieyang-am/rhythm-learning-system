@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3c381d6fa8e194db20e1b203d44ba2, type: 3}
+  m_Name: stage_forest_01
+  m_EditorClassIdentifier: 
+  stageId: forest_01
+  title: forest1-1
+  chapter: 1
+  region: forest
+  bpm: 84
+  timeSignatureTop: 4
+  timeSignatureBottom: 4
+  bars: 4
+  notes:
+  - type: quarter
+    beat: 0
+  - type: eighth_pair
+    beat: 1
+  - type: quarter
+    beat: 2
+  - type: quarter
+    beat: 3
+  - type: quarter
+    beat: 4
+  - type: eighth_pair
+    beat: 5
+  - type: quarter
+    beat: 6
+  - type: quarter
+    beat: 7
+  - type: quarter
+    beat: 8
+  - type: quarter
+    beat: 9
+  - type: eighth_pair
+    beat: 10
+  - type: quarter
+    beat: 11
+  - type: quarter
+    beat: 12
+  - type: quarter
+    beat: 13
+  - type: quarter
+    beat: 14
+  - type: quarter
+    beat: 15
